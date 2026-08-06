@@ -1,60 +1,85 @@
 import express from "express"
 import mysql2 from "mysql2"
 
-const app = express();
+const database = mysql2.createPool({
+    host: "benserverplex.ddns.net",
+    user: "alunos",
+    password: "senhaAlunos",
+    database: "alunos_filmes_03MA"
+})
 
-app.use(express.json());
 
-const pool = mysql.createPool({
-  host: 'benserverplex.ddns.net',
-  user: 'alunos',
-  password: 'senhaAlunos',
-  database: 'alunos_filmes_03MA',
-  waitForConnections: true
-});
+const app = express()
 
-app.get('/filmes', (request, response) => {
-  const conn = pool.getConnection();
-  const selectCommand = database.query('SELECT * FROM filmes_Nathan_MariaClara');
-  
-  database.query(selectCommand, (error,data) => {
-    if (error) {
-      console.log(error)
-      return
-    }
-    response.json(data);
-  })
-  conn.release();
-});
+app.use(express.json())
 
-app.post('/filmes', async (req, res) => {
-  const { titulo, genero, duracao, classificacao_etaria } = req.body;
-  const conn = await pool.getConnection();
-  await conn.query('INSERT INTO filmes_Nathan_MariaClara (titulo, genero, duracao, classificacao_etaria) VALUES (?, ?, ?, ?)', 
-    [titulo, genero, duracao, classificacao_etaria]);
-  res.json({ mensagem: 'Filme adicionado' });
-  conn.release();
-});
+app.get("/all-movies", (request, response) => {
+    const selectCommand = "SELECT * FROM filmes_Nathan_MariaClara"
 
-app.put('/filmes/:id', async (req, res) => {
-  const { id } = request.params;
-  const selectCommand = database.query('SELECT * FROM filmes_Nathan_MariaClara');
-  const task = await sql.promise().query(selectCommand, [id], (error, data) => {
-    if (error) {
-      console.log(error)
-      return
-    }
+    database.query(selectCommand, (error, data) => {
+        if (error) {
+            console.log(error)
+            return
+        }
 
-    updateCommand = database.query('UPDATE * FROM filmes_Nathan_MariaClara')
-  })
-});
+        response.json(data)
+    })
+})
 
-app.delete('/filmes/:id', async (req, res) => {
-  const { id } = req.params;
-  const conn = await pool.getConnection();
-  await conn.query('DELETE FROM filmes_Nathan_MariaClara WHERE id = ?', [id]);
-  res.json({ mensagem: 'Filme removido' });
-  conn.release();
-});
 
-app.listen(3000, () => console.log('Servidor rodando na porta 3000'));
+app.post("/add-movie", (request, response) => {
+    const { titulo, genero, duraçao, classificaçao_etaria } = request.body
+
+    const insertCommand = 
+        "INSERT INTO filmes_Nathan_MariaClara(titulo, genero, duraçao, classificaçao_etaria) VALUES (?, ?, ?, ?)"
+
+    database.query(insertCommand, [titulo, genero, duraçao, classificaçao_etaria], (error) => {
+        if (error) {
+            console.log(error)
+        } else {
+            response.status(201).json({
+                message: "Filme adicionado com sucesso!"
+            })
+        }
+    })
+})
+
+app.delete("/delete-movie/:id", (request, response) => {
+
+    const { id } = request.params
+
+    const deleteCommand = "DELETE FROM filmes_Nathan_MariaClara WHERE id=?"
+
+    database.query(deleteCommand, [id], (error) => {
+        if (error) {
+            console.log(error)
+        } else {
+            response.json({
+                message: "Filme apagado com sucesso!"
+            })
+        }
+    })
+
+})
+
+app.put("/update-movie/:id", (request, response) => {
+    const { id } = request.params
+    const { titulo, genero, duraçao, classificaçao_etaria } = request.body
+
+    const updateCommand = 
+        "UPDATE filmes_Nathan_MariaClara SET titulo = ?, genero = ?, duraçao = ?, classificaçao_etaria = ? WHERE id = ?"
+
+    database.query(updateCommand, [titulo, genero, duraçao, classificaçao_etaria, id], (error) => {
+        if (error) {
+            console.log(error)
+        } else {
+            response.json({
+                message: "Informações do filme atualizadas com sucesso!"
+            })
+        }
+    })
+})
+
+app.listen(3000, () => {
+    console.log("Servidor rodando na porta 3000")
+})                                         

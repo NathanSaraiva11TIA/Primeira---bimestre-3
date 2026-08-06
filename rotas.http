@@ -1,147 +1,147 @@
-GET http://localhost:3000/filmes
+GET http://localhost:3000/all-movies
 
 ###
-POST http://localhost:3000/filmes
+POST http://localhost:3000/add-movie
 Content-Type: application/json
 
 {
   "titulo": "Homem-Aranha: De Volta ao Lar",
   "genero": "Ação",
-  "duracao": 133,
-  "classificacao_etaria": "12"
+  "duraçao": 133,
+  "classificaçao_etaria": "12"
 }
 
 ###
-POST http://localhost:3000/filmes
+POST http://localhost:3000/add-movie
 Content-Type: application/json
 
 {
   "titulo": "Vingadores: Guerra Infinita",
   "genero": "Ação",
-  "duracao": 149,
-  "classificacao_etaria": "12"
+  "duraçao": 149,
+  "classificaçao_etaria": "12"
 }
 
 ###
-POST http://localhost:3000/filmes
+POST http://localhost:3000/add-movie
 Content-Type: application/json
 
 {
   "titulo": "Vingadores: Ultimato",
   "genero": "Ação",
-  "duracao": 181,
-  "classificacao_etaria": "12"
+  "duraçao": 181,
+  "classificaçao_etaria": "12"
 }
 
 ###
-POST http://localhost:3000/filmes
+POST http://localhost:3000/add-movie
 Content-Type: application/json
 
 {
   "titulo": "Homem-Aranha",
   "genero": "Ação",
-  "duracao": 121,
-  "classificacao_etaria": "12"
+  "duraçao": 121,
+  "classificaçao_etaria": "12"
 }
 
 ###
-POST http://localhost:3000/filmes
+POST http://localhost:3000/add-movie
 Content-Type: application/json
 
 {
   "titulo": "Homem-Aranha 2",
   "genero": "Ação",
-  "duracao": 127,
-  "classificacao_etaria": "12"
+  "duraçao": 127,
+  "classificaçao_etaria": "12"
 }
 
 ###
-POST http://localhost:3000/filmes
+POST http://localhost:3000/add-movie
 Content-Type: application/json
 
 {
   "titulo": "Homem-Aranha 3",
   "genero": "Ação",
-  "duracao": 139,
-  "classificacao_etaria": "12"
+  "duraçao": 139,
+  "classificaçao_etaria": "12"
 }
 
 ###
-POST http://localhost:3000/filmes
+POST http://localhost:3000/add-movie
 Content-Type: application/json
 
 {
   "titulo": "Obsessão",
   "genero": "Suspense",
-  "duracao": 98,
-  "classificacao_etaria": "14"
+  "duraçao": 98,
+  "classificaçao_etaria": "14"
 }
 
 ###
-POST http://localhost:3000/filmes
+POST http://localhost:3000/add-movie
 Content-Type: application/json
 
 {
   "titulo": "Odisseia",
   "genero": "Ficção Científica",
-  "duracao": 149,
-  "classificacao_etaria": "Livre"
+  "duraçao": 149,
+  "classificaçao_etaria": "Livre"
 }
 
 ###
-POST http://localhost:3000/filmes
+POST http://localhost:3000/add-movie
 Content-Type: application/json
 
 {
   "titulo": "Todo Mundo em Pânico",
   "genero": "Comédia",
-  "duracao": 88,
-  "classificacao_etaria": "16"
+  "duraçao": 88,
+  "classificaçao_etaria": "16"
 }
 
 ###
-POST http://localhost:3000/filmes
+POST http://localhost:3000/add-movie
 Content-Type: application/json
 
 {
   "titulo": "Todo Mundo em Pânico 2",
   "genero": "Comédia",
-  "duracao": 83,
-  "classificacao_etaria": "16"
+  "duraçao": 83,
+  "classificaçao_etaria": "16"
 }
 
 ###
-POST http://localhost:3000/filmes
+POST http://localhost:3000/add-movie
 Content-Type: application/json
 
 {
   "titulo": "Todo Mundo em Pânico 3",
   "genero": "Comédia",
-  "duracao": 85,
-  "classificacao_etaria": "14"
+  "duraçao": 85,
+  "classificaçao_etaria": "14"
 }
 
 ###
-POST http://localhost:3000/filmes
+POST http://localhost:3000/add-movie
 Content-Type: application/json
 
 {
   "titulo": "Todo Mundo em Pânico 4",
   "genero": "Comédia",
-  "duracao": 87,
-  "classificacao_etaria": "14"
+  "duraçao": 87,
+  "classificaçao_etaria": "14"
 }
 
 ###
-PUT http://localhost:3000/filmes/1
+PUT http://localhost:3000/update-movie/1
 Content-Type: application/json
 
 {
   "titulo": "Homem-Aranha: De Volta ao Lar",
   "genero": "Ação",
-  "duracao": 133,
-  "classificacao_etaria": "12"
+  "duraçao": 133,
+  "classificaçao_etaria": "12"
 }
 
 ###
-DELETE http://localhost:3000/filmes/1
+DELETE http://localhost:3000/delete-movie/1
