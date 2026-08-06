@@ -1,9 +1,9 @@
-const express = require('express');
-const mysql = require('mysql2/promise');
-const bodyParser = require('body-parser');
+import express from "express"
+import mysql2 from "mysql2"
 
 const app = express();
-app.use(bodyParser.json());
+
+app.use(express.json());
 
 const pool = mysql.createPool({
   host: 'benserverplex.ddns.net',
@@ -13,10 +13,17 @@ const pool = mysql.createPool({
   waitForConnections: true
 });
 
-app.get('/filmes', async (req, res) => {
-  const conn = await pool.getConnection();
-  const [filmes] = await conn.query('SELECT * FROM filmes_Nathan_MariaClara');
-  res.json(filmes);
+app.get('/filmes', (request, response) => {
+  const conn = pool.getConnection();
+  const selectCommand = database.query('SELECT * FROM filmes_Nathan_MariaClara');
+  
+  database.query(selectCommand, (error,data) => {
+    if (error) {
+      console.log(error)
+      return
+    }
+    response.json(data);
+  })
   conn.release();
 });
 
@@ -30,13 +37,16 @@ app.post('/filmes', async (req, res) => {
 });
 
 app.put('/filmes/:id', async (req, res) => {
-  const { id } = req.params;
-  const { titulo, genero, duracao, classificacao_etaria } = req.body;
-  const conn = await pool.getConnection();
-  await conn.query('UPDATE filmes_Nathan_MariaClara SET titulo = ?, genero = ?, duracao = ?, classificacao_etaria = ? WHERE id = ?',
-    [titulo, genero, duracao, classificacao_etaria, id]);
-  res.json({ mensagem: 'Filme atualizado' });
-  conn.release();
+  const { id } = request.params;
+  const selectCommand = database.query('SELECT * FROM filmes_Nathan_MariaClara');
+  const task = await sql.promise().query(selectCommand, [id], (error, data) => {
+    if (error) {
+      console.log(error)
+      return
+    }
+
+    updateCommand = database.query('UPDATE * FROM filmes_Nathan_MariaClara')
+  })
 });
 
 app.delete('/filmes/:id', async (req, res) => {
